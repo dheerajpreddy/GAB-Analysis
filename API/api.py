@@ -33,17 +33,18 @@ class Gab:
 		return json.loads(requests.get('https://gab.ai/feed', headers=self.headers, cookies=self.session).text)
 
 	def getpost(self, postid):
-		return (requests.get('https://gab.ai/posts/' + str(postid), headers=self.headers, cookies=self.session).text)
+		return json.loads(requests.get('https://gab.ai/posts/' + str(postid), headers=self.headers, cookies=self.session).text)
 
 	def getfollowers(self, user):
-		return (requests.get('https://gab.ai/users/' + user + '/followers', headers=self.headers, cookies=self.session).text)
+		return json.loads(requests.get('https://gab.ai/users/' + user + '/followers', headers=self.headers, cookies=self.session).text)
 
 	def getfollowing(self, user):
-		return (requests.get('https://gab.ai/users/' + user + '/following', headers=self.headers, cookies=self.session).text)
+		return json.loads(requests.get('https://gab.ai/users/' + user + '/following', headers=self.headers, cookies=self.session).text)
 
 	def getusertimeline(self, user):
-		return (requests.get('https://gab.ai/feed/' + user, headers=self.headers, cookies=self.session).text)
+		return json.loads(requests.get('https://gab.ai/feed/' + user, headers=self.headers, cookies=self.session).text)
+
+	def gettrending(self):
+		# to be completed
 
 gab = Gab('thaarabaap', 'gabpassword')
-var = gab.getusertimeline('dheerajpreddy')
-print (var)
