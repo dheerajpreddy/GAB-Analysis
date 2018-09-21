@@ -20,9 +20,6 @@ class Gab:
 		else:
 			return json.loads(requests.get('https://gab.ai/api/search?sort=' + sort + '&q=' + query, headers=self.headers, cookies=self.session).text)
 
-	def follow(self, user):
-		requests.post('https://gab.ai/users/' + str(user) + '/follow', headers=self.headers, cookies=self.session)
-
 	def getme(self):
 		return json.loads(requests.get('https://gab.ai/home/', headers=self.headers, cookies=self.session).text.split('window.authUser = ')[1].split(';')[0])
 
@@ -35,9 +32,6 @@ class Gab:
 	def gettimeline(self):
 		return json.loads(requests.get('https://gab.ai/feed', headers=self.headers, cookies=self.session).text)
 
-	def getusertimeline(self, username):
-		return (requests.get('https://gab.ai/' + username, headers=self.headers, cookies=self.session).text)
-
 	def getpost(self, postid):
 		return (requests.get('https://gab.ai/posts/' + str(postid), headers=self.headers, cookies=self.session).text)
 
@@ -47,6 +41,9 @@ class Gab:
 	def getfollowing(self, user):
 		return (requests.get('https://gab.ai/users/' + user + '/following', headers=self.headers, cookies=self.session).text)
 
+	def getusertimeline(self, user):
+		return (requests.get('https://gab.ai/feed/' + user, headers=self.headers, cookies=self.session).text)
+
 gab = Gab('thaarabaap', 'gabpassword')
-topics = gab.getfollowers('dheerajpreddy')
-print (topics)
+var = gab.getusertimeline('dheerajpreddy')
+print (var)
