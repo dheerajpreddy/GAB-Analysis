@@ -13,4 +13,9 @@ PSOSM course project
 2. Topics hate speech is on
 3. Most used words and bigrams in hate speech
 4. Wordcloud of all posts, and hate speech posts
-5. 
+5. Network analysis of hate speech
+6. Analysis of trending posts, probably a couple of graphs here
+7. <temp>
+8. <temp>
+9. <temp>
+10. <temp>

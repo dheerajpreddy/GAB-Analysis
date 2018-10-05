@@ -10,7 +10,7 @@ class Gab:
 		self.session = f.cookies
 		token = f.text.split('"_token" value="')[1].split('"')[0]
 		self.session = requests.post('https://gab.ai/auth/login', headers=self.headers, cookies=self.session, data={'_token':token, 'password':password, 'username':username}).cookies
-		
+
 	def getnotifications(self, type='null'):
 		return json.loads(requests.get('https://gab.ai/api/notifications?type=' + type, headers=self.headers, cookies=self.session).text)
 
@@ -47,4 +47,4 @@ class Gab:
 	def gettrending(self):
 		# to be completed
 
-gab = Gab('thaarabaap', 'gabpassword')
+gab = Gab('dheerajpreddy', 'Test@123')
