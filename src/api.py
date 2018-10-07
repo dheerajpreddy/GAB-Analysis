@@ -43,8 +43,3 @@ class Gab:
 
 	def getusertimeline(self, user):
 		return json.loads(requests.get('https://gab.ai/feed/' + user, headers=self.headers, cookies=self.session).text)
-
-	def gettrending(self):
-		# to be completed
-
-gab = Gab('dheerajpreddy', 'Test@123')
