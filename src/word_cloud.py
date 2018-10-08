@@ -12,7 +12,8 @@ fp.close()
 
 for response in responses:
 	text = response['text']
-	word_list = re.sub("[^\w]", " ",  text).split()
+	text = re.sub(r"http\S+", "", text)
+	word_list = re.sub("[^\w]", " ", text).split()
 	stop_words = list(stopwords.words('english'))
 	words_to_remove = []
 	
