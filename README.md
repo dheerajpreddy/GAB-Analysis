@@ -10,9 +10,9 @@ PSOSM course project
 
 ## Various plots
 1. Percentage of hate in posts
-2. Topics hate speech is on
-3. Most used words and bigrams in hate speech
-4. Wordcloud of all posts, and hate speech posts
+<!-- 2. Topics hate speech is on -->
+3. Most used words and bigrams in hate speech and offensive posts
+4. Wordcloud of all posts, and hate speech posts, and offensive posts
 5. Network analysis of hate speech
 6. Analysis of trending posts, probably a couple of graphs here
 7. <temp>
