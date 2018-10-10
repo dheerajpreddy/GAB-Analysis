@@ -1,6 +1,6 @@
 import json
 
-with open('hates.json', 'r') as fp:
+with open('hates999.json', 'r') as fp:
     responses = json.load(fp)
 fp.close()
 
@@ -19,3 +19,5 @@ for i in range(len(responses)):
 print("Hate #: ", hate*100/float(len(responses)))
 print("Offensive #: ", offensive*100/float(len(responses)))
 print("Neither #: ", neither*100/float(len(responses)))
+
+print(len(responses))
