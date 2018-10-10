@@ -79,11 +79,15 @@ if __name__ == '__main__':
     hate_str = removeStopWords(hate_str)
     offense_str = removeStopWords(offense_str)
     neither_str = removeStopWords(neither_str)
+
+    print("Hate")
     ngrams = count_ngrams(hate_str)
     print_most_frequent(ngrams)
 
+    print("Offensive")
     ngrams = count_ngrams(offense_str)
     print_most_frequent(ngrams)
 
+    print("Neither")
     ngrams = count_ngrams(neither_str)
     print_most_frequent(ngrams)
