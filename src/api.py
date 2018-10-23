@@ -44,6 +44,9 @@ class Gab:
 			count += 30
 		return followers
 
+	def old_getfollowers(self, user):
+ 		return json.loads(requests.get('https://gab.ai/users/' + user + '/followers', headers=self.headers, cookies=self.session).text)
+
 	def getfollowing(self, user):
 		return json.loads(requests.get('https://gab.ai/users/' + user + '/following', headers=self.headers, cookies=self.session).text)
 
