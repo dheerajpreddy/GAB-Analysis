@@ -50,8 +50,18 @@ class Gab:
 	def getfollowing(self, user):
 		return json.loads(requests.get('https://gab.ai/users/' + user + '/following', headers=self.headers, cookies=self.session).text)
 
-	def getusertimeline(self, user):
-		return json.loads(requests.get('https://gab.ai/feed/' + user, headers=self.headers, cookies=self.session).text)
+	def getusertimeline(self, user, limit):
+		gabs = []
+		obj = json.loads(requests.get('https://gab.ai/feed/' + user , headers=self.headers, cookies=self.session).text)['data']
+		count = len(obj)
+		while count < limit:
+			date = obj[-1]['published_at']
+			obj = json.loads(requests.get('https://gab.ai/feed/' + user + '?before=' + date, headers=self.headers, cookies=self.session).text)['data']
+			if len(obj) == 0:
+				break
+			gabs += obj
+			count += len(obj)
+		return gabs
 
 gab = Gab('dheerajpreddy', 'Test@123')
-print (gab.getusertimeline('e'))
+print (len(gab.getusertimeline('e', 1000)))
