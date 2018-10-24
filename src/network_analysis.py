@@ -71,18 +71,18 @@ for i in range(len(usernames)):
     n = False
     h = False
     o = False
-    if 'is_neutral' in usernames[i]:
-        n = True
     if 'is_hate_speech' in usernames[i]:
         h = True
     if 'is_offensive_language' in usernames[i]:
         o = True
+    if not h and not o:
+        n = True
     row = [usernames[i]['id'], usernames[i]['username'], usernames[i]['name'], usernames[i]['follower_count'], usernames[i]['following_count'], usernames[i]['score'], usernames[i]['is_premium'], usernames[i]['is_pro'], h, o, n]
-    if 'is_neutral' in usernames[i]:
+    if n:
         wr_nodes_neither.writerow(row)
-    if 'is_hate_speech' in usernames[i]:
+    if h:
         wr_nodes_hate.writerow(row)
-    if 'is_offensive_language' in usernames[i]:
+    if o:
         wr_nodes_offense.writerow(row)
     wr_nodes_all.writerow(row)
     # followers = gab.old_getfollowers(usernames[i]['username'])
