@@ -22,7 +22,3 @@ for i in range(2000):
                 json.dump(json_data, feedsjson)
         except:
             print("ERROR for " + people[i]['username'])
-
-# fp2 = open('gabs999.json', 'w')
-# json.dump(all_gabs, fp2)
-# fp2.close()
