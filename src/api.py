@@ -36,12 +36,17 @@ class Gab:
 		return json.loads(requests.get('https://gab.ai/posts/' + str(postid), headers=self.headers, cookies=self.session).text)
 
 	def getfollowers(self, user, limit):
-		total = json.loads(requests.get('https://gab.ai/users/' + user + '/followers', headers=self.headers, cookies=self.session).text)['count']
 		count = 0
 		followers = []
-		while count < total and count < limit:
-			followers += (json.loads(requests.get('https://gab.ai/users/' + user + '/followers?before='+str(count), headers=self.headers, cookies=self.session).text)['data'])
-			count += 30
+		try:
+			total = json.loads(requests.get('https://gab.ai/users/' + user + '/followers', headers=self.headers, cookies=self.session).text)['count']
+			while count < total and count < limit:
+				temp = json.loads(requests.get('https://gab.ai/users/' + user + '/followers?before='+str(count), headers=self.headers, cookies=self.session).text)
+				if 'data' in temp:
+					followers += temp['data']
+					count += 30
+		except:
+			pass
 		return followers
 
 	def old_getfollowers(self, user):
@@ -52,16 +57,19 @@ class Gab:
 
 	def getusertimeline(self, user, limit):
 		gabs = []
-		obj = json.loads(requests.get('https://gab.ai/feed/' + user , headers=self.headers, cookies=self.session).text)['data']
-		count = len(obj)
-		while count < limit:
-			date = obj[-1]['published_at']
-			obj = json.loads(requests.get('https://gab.ai/feed/' + user + '?before=' + date, headers=self.headers, cookies=self.session).text)['data']
-			if len(obj) == 0:
-				break
-			gabs += obj
-			count += len(obj)
+		try:
+			obj = json.loads(requests.get('https://gab.ai/feed/' + user , headers=self.headers, cookies=self.session).text)['data']
+			count = len(obj)
+			while count < limit:
+				date = obj[-1]['published_at']
+				obj = json.loads(requests.get('https://gab.ai/feed/' + user + '?before=' + date, headers=self.headers, cookies=self.session).text)['data']
+				if len(obj) == 0:
+					break
+				gabs += obj
+				count += len(obj)
+		except:
+			pass
 		return gabs
 
 gab = Gab('dheerajpreddy', 'Test@123')
-print (len(gab.getusertimeline('e', 1000)))
+print (len(gab.getfollowers('e', 1000)))
