@@ -81,6 +81,35 @@ class Gab:
 			return gabs
 		return gabs
 
-gab = Gab('dheerajpreddy', 'Test@123')
-ans = gab.getusertimeline('a', 100)
-print (len(ans))
+	def get_topics(self, limit):
+		topics = []
+		obj = json.loads(requests.get('https://gab.com/api/topics/archive').text)
+		for data in obj:
+			for haha in data['topics']:
+				topics.append(haha)
+			if len(topics) > limit:
+				return topics
+		return topics
+
+	def get_topical_gabs(self, topic_id, limit):
+		gabs = []
+		obj = json.loads(requests.get('https://gab.com/api/topics/'+topic_id+'/feed?sort=date&timeframe=day').text)
+		for data in obj['data']:
+			gabs.append(data)
+			if len(gabs) >= limit:
+				break
+		return gabs
+
+	def get_trending_gabs(self, limit):
+		gabs = []
+		gab = Gab('dheerajpreddy', 'Test@123')
+		topics = gab.get_topics(1000)
+		for topic in topics:
+			if len(gabs) >= limit:
+				break
+			topic_id = topic['id']
+			try:
+				gabs += gab.get_topical_gabs(topic_id, 100)
+			except:
+				continue
+		return gabs
