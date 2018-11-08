@@ -7,18 +7,32 @@ with open('username.json', 'r') as fp:
     people = json.load(fp)
 fp.close()
 
-with open("gabs999.json", 'w') as f:
-    json.dump([], f)
+total = 50000
+count = 0
+haha = 0
 
-for i in range(2000):
-    with open('gabs999.json') as f2:
-        json_data = json.load(f2)
-    print(i, len(json_data))
-    if people[i]['is_private'] is False:
-        try:
-            gabs = gab.getusertimeline(people[i]['username'])['data']
-            json_data = json_data + gabs
-            with open("gabs999.json", 'w') as feedsjson:
-                json.dump(json_data, feedsjson)
-        except:
-            print("ERROR for " + people[i]['username'])
+with open('newgabs.json', 'w') as f:
+	json.dump([], f)
+f.close()
+
+for user in people:
+	print (haha)
+	print (count)
+	print ('\n')
+	if count >= total:
+		break
+	haha += 1
+	print (user)
+	try:
+		with open('newgabs.json', 'r') as fp:
+			data = json.load(fp)
+		fp.close()
+		username = user['username']
+		gabs = gab.getusertimeline(username, 100)
+		count += len(gabs)
+		data += gabs
+		with open('newgabs.json', 'w') as f:
+			json.dump(data, f)
+		f.close()
+	except:
+		continue
