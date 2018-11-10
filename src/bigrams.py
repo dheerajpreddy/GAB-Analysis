@@ -60,7 +60,7 @@ def removeStopWords(text):
 
 if __name__ == '__main__':
 
-    with open('hates999.json', 'r') as fp:
+    with open('case_study_sonar.json', 'r') as fp:
         responses = json.load(fp)
     fp.close()
     hate_str = ""

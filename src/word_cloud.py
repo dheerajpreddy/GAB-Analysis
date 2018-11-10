@@ -6,7 +6,7 @@ from nltk.corpus import stopwords
 import nltk
 from wordcloud import WordCloud
 
-fp = open('hates999.json', 'r')
+fp = open('case_study_sonar.json', 'r')
 responses = json.load(fp)
 fp.close()
 
